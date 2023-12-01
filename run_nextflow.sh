@@ -1,17 +1,17 @@
 #!/bin/bash
 
 # User-configurable variables
-CONTAINER="/storage/marwe/pipelines/Pipeline_1/container/Pipeline_1.sif"  # Path to the container
-INPUT_READS_PATH="/storage/marwe/test/reads/sub_DEER_subsampled*R{1,2}.fq.gz"  # Path to input reads for annotation.nf
-TRIMGALORE_PATH="/storage/marwe/test/Data_pipeline_test/storeDir/trimGalore/"  # Path to TrimGalore output for multiQC.nf
-MGE_DB_RAW_PATH="/storage/marwe/test/pipeline/mobileOG-db_beatrix-1.6.MC.faa"  # Path to mobileOG-db_beatrix-1.6.MC.faa file
-MGE_DB_PATH="/storage/marwe/test/Data_pipeline_test/storeDir/mobileOG/"  # Path to processed MGE database
-ARG_DB_PATH="/storage/marwe/test/Data_pipeline_test/storeDir/ResFinder/"  # Path to processed ARG database
-OUTPUT_DIR_PATH="/storage/marwe/test/Data_pipeline_test/data_out/"  # Path to output directory
-STOREDIR="/storage/marwe/test/Data_pipeline_test/storeDir/"  # Path to where long term cache should be stored
+CONTAINER="/path/to/container.sif"  # Path to the container image file
+INPUT_READS_PATH="/path/to/input/reads/*.fq.gz"  # Path to input reads for annotation.nf (supports wildcard patterns)
+TRIMGALORE_PATH="/path/to/trimGalore/output/"  # Path to TrimGalore output for multiQC.nf
+MGE_DB_RAW_PATH="/path/to/raw/mobileOG-db.faa"  # Path to raw mobileOG database file
+MGE_DB_PATH="/path/to/processed/mobileOG/db/"  # Path to processed MGE database directory
+ARG_DB_PATH="/path/to/processed/ARG/db/"  # Path to processed ARG database directory
+OUTPUT_DIR_PATH="/path/to/output/directory/"  # Path to output directory
+STOREDIR="/path/to/storeDir/"  # Path to directory for storing long-term cache
 EXECUTOR="server"  # Executor type (e.g., 'server' or 'cluster')
-CLUSTEROPTIONS="-A C3SE2023-1-21 -p vera"  # type "-A {account name associated with the job submission} -p {partision} ". eg. "-A C3SE2021-2-3 -p vera"
-ID="test_1"  # Unique ID for this run
+CLUSTEROPTIONS="cluster_options"  # Cluster options (e.g., "-A C3SE2021-2-3 -p vera")
+ID="unique_run_id"  # Unique ID for this run
 
 ##########################################################
 # No need to modify anything below this line
@@ -41,7 +41,6 @@ if [ -z "$SCRIPT_TO_RUN" ]; then
     usage
     exit 1
 fi
-
 
 # Launch Nextflow pipeline
 nextflow run nf_scripts/$SCRIPT_TO_RUN \
