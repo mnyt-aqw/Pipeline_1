@@ -29,7 +29,7 @@ workflow {
     metaxaqr_ttt_ch = MetaxaQR_ttt(metaxaqr_ch[0]) // Run MetaxaQR_ttt
     metaxaQR_dc_ch = MetaxaQR_dc(metaxaqr_ttt_ch[1].collect()) // Run MetaxaQR_dc
     
-    Gene_Normalization(phenotype, diamond_ch[0].collect(), metaxaqr_ttt_ch[0].collect()) // Normalize Diamond results and output one singe file per database
+  //  Gene_Normalization(phenotype, diamond_ch[0].collect(), metaxaqr_ttt_ch[0].collect()) // Normalize Diamond results and output one singe file per database
     
 }
 
@@ -75,8 +75,13 @@ process MetaxaQR {
 
     script:
     """
-    gunzip -c ${trimmed_reads[0]} > read_R1.fastq &
-    gunzip -c ${trimmed_reads[1]} > read_R2.fastq &
+    zcat ${trimmed_reads[0]} > read_R1.fastq &
+    zcat ${trimmed_reads[1]} > read_R2.fastq &
+
+    # Wait for the background processes to finish
+    wait
+
+    # Run MetaxaQR
     metaxaQR -1 read_R1.fastq -2 read_R2.fastq -o ${sample_id}_${params.run_id}  --cpu ${task.cpus} -g SSU -d /MetaxaQR/metaxaQR_db/SSU/mqr
     rm read_R*.fastq 
     pigz -p ${task.cpus} *.fasta 
