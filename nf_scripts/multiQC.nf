@@ -8,14 +8,6 @@ workflow {
 }
 
 process MultiQC {
-    cache false
-    cpus 1
-    time { 40.minutes * Math.pow(1.5, task.attempt - 1) }
-    errorStrategy 'terminate'
-    maxRetries 3
-    queue 'short'
-    publishDir "${params.directory_out}MultiQC/"
-    storeDir "${params.storeDir}MultiQC/"
 
 	input:
 	path files

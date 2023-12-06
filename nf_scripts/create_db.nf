@@ -19,14 +19,6 @@ workflow {
 }
 
 process Build_ResFinder_db {
-    cache true
-    cpus 1
-    time { 10.minutes * Math.pow(1.5, task.attempt - 1) }
-    errorStrategy 'terminate'
-    maxRetries 3
-    queue 'short'
-    publishDir "${params.directory_out}ResFinder/"
-    storeDir "${params.storeDir}ResFinder/"
 
     output:
     path "ResFinderARGs.dmnd"

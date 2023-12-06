@@ -34,13 +34,6 @@ workflow {
 }
 
 process TrimGalore {
-    errorStrategy { task.exitStatus in 137..140 ? 'retry' : 'terminate' }
-    maxRetries 3
-    queue { entries > 100 ? 'long' : 'short' }
-    cpus 10
-    time { 2.hours * Math.pow(1.5, task.attempt - 1) }
-    publishDir "${params.directory_out}trimGalore/"
-    storeDir "${params.storeDir}trimGalore/"
 
     input:
     tuple val(sample_id), path(reads)
@@ -57,14 +50,6 @@ process TrimGalore {
 }
 
 process Diamond {
-    cache true
-    cpus  15
-    time  { 2.hours * Math.pow(1.5, task.attempt - 1) }
-    errorStrategy  { task.exitStatus in 137..140 ? 'retry' : 'terminate' }
-    maxRetries = 3
-    queue  { entries > 100 ? 'long' : 'short' }
-    publishDir  "${params.directory_out}Diamond/"
-    storeDir  "${params.storeDir}Diamond/"
 
     input:
     tuple val(sample_id), path(trimmed_reads)
@@ -80,14 +65,6 @@ process Diamond {
 }
 
 process MetaxaQR {
-    cache true
-    cpus  10
-    time  { 6.hours * Math.pow(1.5, task.attempt - 1) }
-    errorStrategy  { task.exitStatus in 137..140 ? 'retry' : 'terminate' }
-    maxRetries  3
-    queue  { entries > 100 ? 'long' : 'short' }
-    publishDir  "${params.directory_out}MetaxaQR/"
-    storeDir  "${params.storeDir}MetaxaQR/"
 
     input:
     tuple val(sample_id), path(trimmed_reads) 
@@ -107,14 +84,6 @@ process MetaxaQR {
 }
 
 process MetaxaQR_ttt {
-    cache true
-    cpus 1
-    time { 10.minutes * Math.pow(1.5, task.attempt - 1) }
-    errorStrategy 'terminate'
-    maxRetries 3
-    queue { entries > 100 ? 'long' : 'short' }
-    publishDir "${params.directory_out}MetaxaQR_ttt/"
-    storeDir "${params.storeDir}MetaxaQR_ttt/"
 
     input:
     tuple val(sample_id), path(genus_files) 
@@ -132,14 +101,6 @@ process MetaxaQR_ttt {
 }
 
 process MetaxaQR_dc {
-    cache false
-    cpus 1
-    time { 10.minutes * Math.pow(1.5, task.attempt - 1) }
-    errorStrategy 'terminate'
-    maxRetries 3
-    queue { entries > 100 ? 'long' : 'short' }
-    publishDir "${params.directory_out}/MetaxaQR_dc/"
-    storeDir "${params.storeDir}/MetaxaQR_dc/"
 
     input:
     path level_6
@@ -155,14 +116,6 @@ process MetaxaQR_dc {
 }
 
 process Gene_Normalization {
-    cache false
-    cpus 15
-    time { 6.hours * Math.pow(1.5, task.attempt - 1) }
-    errorStrategy { task.exitStatus in 137..140 ? 'retry' : 'terminate' }
-    maxRetries 3
-    queue { entries > 100 ? 'long' : 'short' }
-    publishDir "${params.directory_out}Diamond_normalized/"
-    storeDir "${params.storeDir}Diamond_normalized/"
 
     input:
     path phenotype
