@@ -2,7 +2,7 @@
 #SBATCH -A C3SE2023-1-21 -p vera
 #SBATCH -J riksmaten_test
 #SBATCH -c 1
-#SBATCH -t 24:00:00
+#SBATCH -t 00:00:00
 #SBATCH --error={PATH}/job.%J.err 
 #SBATCH --output={PATH}/job.%J.out 
 
@@ -16,8 +16,8 @@ CLUSTEROPTIONS="-A C3SE2023-1-21 -p vera"  # Cluster options
 ID="unique_run_id"  # Unique ID for this run
 
 # Input/output paths
-OUTPUT_DIR_PATH="{PATH/Data/"  # Path to output directory
-STOREDIR="{PATH}/storeDir/"  # Path to directory for storing long-term cache
+OUTPUT_DIR_PATH="{PATH/Data/"  # Path to output directory. Same as `publishDir`
+STOREDIR="{PATH}/storeDir/"  # Path to directory for storing long-term cache. Same as `storeDir`
 INPUT_READS_PATH="{PATH}/*R{1,2}*.fastq.gz"  # Path to input reads for annotation.nf (supports wildcard patterns)
 TRIMGALORE_PATH="{PATH}/TrimGalore/"  # Path to TrimGalore output for multiQC.nf
 MGE_DB_RAW_PATH="{PATH}/mobileOG-db_beatrix-1.6.MC.faa"  # Path to raw mobileOG database file
