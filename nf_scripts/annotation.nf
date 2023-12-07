@@ -29,9 +29,8 @@ workflow {
     metaxaqr_ttt_ch = MetaxaQR_ttt(metaxaqr_ch[0]) // Run MetaxaQR_ttt
     metaxaQR_dc_ch = MetaxaQR_dc(metaxaqr_ttt_ch[1].collect()) // Run MetaxaQR_dc
     
-
-    // This part is still in progress. uncomment and rerun pipeline when the script is finished.
-  //  Gene_Normalization(phenotype, diamond_ch[0].collect(), metaxaqr_ttt_ch[0].collect()) // Normalize Diamond results and output one singe file per database
+    // Normalizing gene abundance
+    Gene_Normalization(phenotype, diamond_ch[0].collect(), metaxaqr_ttt_ch[0].collect()) // Normalize Diamond results and output one singe file per database
     
 }
 
