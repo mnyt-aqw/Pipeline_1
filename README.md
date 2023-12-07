@@ -2,9 +2,6 @@
 
 # Pipeline_1
 
-> [!NOTE]  
-> The `Gene_Normalization` process will need some work. But you can run everything else first. When the process is updated replace theold script and alunch the entire pipelien agin. It will then only do the `Gene_Normalization`  process with the cashed file.
-
 ## Overview
 
 Pipeline_1 is a comprehensive bioinformatics pipeline designed for processing and analyzing DNA sequencing data. It consists of three main components: the Create DB Pipeline, the Annotation Pipeline, and the MultiQC Pipeline.
@@ -63,8 +60,10 @@ To use Pipeline_1, follow these steps:
    ```
 
 2. **Configure the Pipeline**:
+
 - Edit the provided script files to set the paths and parameters according to your data and environment. Just replace {PATH} with your decired path.
-- The names wraped in ``are Nextflow related functions or features. You can read more about them in their [doccumentation](https://www.nextflow.io/docs/latest/index.html).     
+- The names wraped in ``are Nextflow related functions or features. You can read more about them in their [doccumentation](https://www.nextflow.io/docs/latest/index.html).
+
 ```bash
   # User-configurable variables
  CONTAINER="{PATH}/Pipeline_1/container/Pipeline_1.sif"  # Path to the container image file
@@ -89,7 +88,8 @@ To use Pipeline_1, follow these steps:
  ```
 
 3. **Run the Pipeline**:
- - Execute the desired pipeline script. 
+
+- Execute the desired pipeline script.
 
  ```bash
  # Local
@@ -99,7 +99,7 @@ To use Pipeline_1, follow these steps:
  sbatch run_nextflow_slurm.sh -s annotation.nf
  ```
 
- - Replace `annotation.nf` with the script corresponding to the pipeline you wish to run (`create_db.nf`, `annotation.nf`, or `multiQC.nf`).
+- Replace `annotation.nf` with the script corresponding to the pipeline you wish to run (`create_db.nf`, `annotation.nf`, or `multiQC.nf`).
 
 ## Input and Output
 
