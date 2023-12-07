@@ -154,6 +154,7 @@ module load Nextflow
 
 ### Rest of script
 ```
+
 ## Handling Timeouts on the Cluster
 
 When running Pipeline_1 on a cluster, it's possible that a run may timeout due to the cluster's job scheduling constraints whis is a maximum of 7 days fora job. If a run is terminated by the cluster because it exceeded the allocated time, you can simply restart it using the same command again. The pipeline is designed to resume from where it left off, thanks to Nextflow's caching mechanism and the `storeDir` directive.
@@ -161,3 +162,11 @@ When running Pipeline_1 on a cluster, it's possible that a run may timeout due t
 ## Using `scratch=true` for Efficient Execution
 
 In the pipeline, `scratch=true` is set for each process, which means that all processes are executed on the temporary storage (`/TMPDIR`). It reduces the I/O load on the main file system.
+
+## Normalizing gene abundance
+
+The script X normalizes the abundance of all genes to the number fo bacterial SSU sequences found in the sample as well as teh gene length according to the equation.
+
+$$\frac{Gene\ occurrence / Gene\ length}{nr\ 16s\ rRNA /720 }$$
+
+A gene is considered to be a multi resistance gene if it conferer resistance towards 2 or more antibiotics.
