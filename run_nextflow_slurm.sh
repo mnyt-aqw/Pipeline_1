@@ -64,7 +64,7 @@ nextflow run nf_scripts/$SCRIPT_TO_RUN \
     --ARG_db_path $ARG_DB_PATH \
     --storeDir $STOREDIR \
     --container $CONTAINER \
-    --cluster_options $CLUSTEROPTIONS \
+    --cluster_options "$CLUSTEROPTIONS" \
     --run_id $ID \
     -c nf_scripts/nextflow.config \
     --scratch_dir $TMPDIR
