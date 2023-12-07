@@ -170,3 +170,7 @@ The script X normalizes the abundance of all genes to the number fo bacterial SS
 $$\frac{Gene\ occurrence / Gene\ length}{nr\ 16s\ rRNA /720 }$$
 
 A gene is considered to be a multi resistance gene if it conferer resistance towards 2 or more antibiotics.
+
+## Customize time
+
+The time each process is allocated in specified in the nextflow.config file and looks like this `time = { 8.hours * Math.pow(1.5, task.attempt - 1) }`. This basically means that each time is allocated 8 hours. And it it times out it the time allocated wiht increase with 50% for a maximum of 3 times due to `maxRetries = 3`. If you have small samples you might want to reduce this time since it will be easier to find time slots for the processes if they are shorter.You can also modify `cpus = 10` if you want to allocate more or fewer cpu's per process.
