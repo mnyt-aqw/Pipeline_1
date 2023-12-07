@@ -77,6 +77,7 @@ process MetaxaQR {
 
     script:
     """
+    # Unzip metagenomes
     zcat ${trimmed_reads[0]} > read_R1.fastq &
     zcat ${trimmed_reads[1]} > read_R2.fastq &
 
@@ -84,8 +85,12 @@ process MetaxaQR {
     wait
 
     # Run MetaxaQR
-    metaxaQR -1 read_R1.fastq -2 read_R2.fastq -o ${sample_id}_${params.run_id}  --cpu ${task.cpus} -g SSU -d /MetaxaQR/metaxaQR_db/SSU/mqr
+    metaxaQR -1 read_R1.fastq -2 read_R2.fastq -o ${sample_id}_${params.run_id} --cpu ${task.cpus} -g SSU -d /MetaxaQR/metaxaQR_db/SSU/mqr
+
+    # Remove unziped metagenomes
     rm read_R*.fastq 
+
+    # Zip fasta output
     pigz -p ${task.cpus} *.fasta 
     """
 }
