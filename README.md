@@ -1,7 +1,5 @@
 # Pipeline_1
 
-# Pipeline_1
-
 ## Overview
 
 Pipeline_1 is a comprehensive bioinformatics pipeline designed for processing and analyzing DNA sequencing data. It consists of three main components: the Create DB Pipeline, the Annotation Pipeline, and the MultiQC Pipeline.
