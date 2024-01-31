@@ -54,7 +54,7 @@ if [ -z "$SCRIPT_TO_RUN" ]; then
 fi
 
 # Launch Nextflow pipeline
-nextflow run nf_scripts/$SCRIPT_TO_RUN \
+NXF_VER=23.10.1 nextflow run nf_scripts/$SCRIPT_TO_RUN \
     --input_reads $INPUT_READS_PATH \
     --trimgalore_path $TRIMGALORE_PATH \
     --directory_out $OUTPUT_DIR_PATH \
