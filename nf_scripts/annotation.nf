@@ -40,7 +40,7 @@ process TrimGalore {
     tuple val(sample_id), path(reads)
 
     output:
-    tuple val(sample_id), path("*R{1,2}*val*.fq.gz")
+    tuple val(sample_id), path("${sample_id}*R{1,2}*val*.fq.gz")
     tuple val(sample_id), path("*${sample_id}*fastqc.zip")
     path "*${sample_id}*trimming_report.txt"
   
