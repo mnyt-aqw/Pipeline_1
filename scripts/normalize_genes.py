@@ -104,12 +104,13 @@ def normalize_gene_data(df_temp, nr_ssu):
         DataFrame: A DataFrame with normalized gene data.
     """
     # Counts how many reads aligned with each ARG/MGE
-    gene_counts = df_temp['sseqid'].value_counts().reset_index()
-    gene_counts.columns = ["Genes", "Count"]
+    gene_counts = df_temp[['sample_id','sseqid']].value_counts().reset_index()
+    gene_counts.columns = ['sample_id',"Genes", "Count"]
+    
     
     # Add data like gene length etc
-    df_temp = df_temp.merge(gene_counts, left_on='sseqid', right_on='Genes', how='right')
-    
+    df_temp = df_temp.merge(gene_counts, left_on=['sseqid', 'sample_id'], right_on=['Genes', 'sample_id'], how='right')
+    print(df_temp)
     # add nr of ssu for each sample
     df_temp['nr_ssu'] = df_temp['sample_id'].map(nr_ssu)
     
