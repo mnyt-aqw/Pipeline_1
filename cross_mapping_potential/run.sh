@@ -1,0 +1,1 @@
+NXF_VER=23.10.1 nextflow run main.nf -resume
